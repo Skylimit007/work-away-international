@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workaway International | Ethical International Work Placement</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand"><span class="logo">W</span><span><strong>Workaway</strong> International</span></a>
+      <nav>
+        <a href="#jobs">Jobs</a>
+        <a href="#process">Process</a>
+        <a href="#eligibility">Eligibility</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-sm">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Seasonal &amp; temporary work in the United States</p>
+        <h1>Work abroad with confidence and transparency.</h1>
+        <p class="lead">Workaway International connects job seekers with verified U.S. employers hiring through the H-2A and H-2B temporary worker programs. We guide you through every step, from preparing your documents to getting ready to travel.</p>
+        <div class="actions">
+          <a href="#jobs" class="btn">Browse Jobs</a>
+          <a href="#eligibility" class="btn btn-ghost">Check Eligibility</a>
+        </div>
+        <div class="notice"><strong>Zero fees to workers.</strong> U.S. law prohibits charging H-2A/H-2B workers recruitment fees. We will never ask you for payment.</div>
+      </div>
+      <div class="hero-card">
+        <h3>Why candidates choose us</h3>
+        <ul class="checks">
+          <li>Employers verified against U.S. Department of Labor certifications</li>
+          <li>Written job offers with pay, hours and housing details</li>
+          <li>Visa interview preparation and travel checklists</li>
+          <li>Support from a real team, by email and phone</li>
+        </ul>
+        <div class="stats">
+          <div><b>6</b><span>Open roles</span></div>
+          <div><b>$0</b><span>Worker fees</span></div>
+          <div><b>100%</b><span>Written offers</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jobs" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Current opportunities</h2>
+        <p>Every role listed comes from an employer holding an approved labor certification.</p>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="job-list"><p>Loading jobs…</p></div>
+    </div>
+  </section>
+
+  <section id="process" class="section alt">
+    <div class="container">
+      <div class="section-head"><h2>How it works</h2><p>Five clear steps. You always know what comes next.</p></div>
+      <ol class="steps">
+        <li><b>Register interest</b><span>Tell us about your experience and the type of work you want.</span></li>
+        <li><b>Match with an employer</b><span>We introduce you to certified employers with suitable openings.</span></li>
+        <li><b>Receive a written offer</b><span>Review the wages, hours, housing and contract length before accepting.</span></li>
+        <li><b>Visa application</b><span>Your employer files the petition. We help you prepare for your consular interview.</span></li>
+        <li><b>Travel &amp; arrival</b><span>Get a pre-departure checklist and onboarding information before you fly.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="eligibility" class="section">
+    <div class="container elig">
+      <div>
+        <h2>Quick eligibility check</h2>
+        <p>Answer three questions for a general indication. No personal documents are needed.</p>
+        <form id="elig-form" class="card form">
+          <label>Are you 18 or older?<select name="age" required><option value="">Select</option><option>Yes</option><option>No</option></select></label>
+          <label>Do you hold a valid passport (or can you get one)?<select name="passport" required><option value="">Select</option><option>Yes</option><option>No</option></select></label>
+          <label>Is your country on the H-2A/H-2B eligible countries list?<select name="country" required><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></label>
+          <button class="btn" type="submit">Check</button>
+        </form>
+      </div>
+      <div class="card result" id="elig-result">
+        <h3>Your result</h3>
+        <p>Complete the form to see your next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section alt">
+    <div class="container">
+      <div class="section-head"><h2>Frequently asked questions</h2></div>
+      <details><summary>Do I have to pay to apply?</summary><p>No. Workaway International never charges workers. If anyone asks you for money in our name, please report it to us and to the U.S. Department of Labor.</p></details>
+      <details><summary>Who pays for my visa and travel?</summary><p>Under H-2A and H-2B rules, employers generally cover visa fees and inbound travel costs, either upfront or by reimbursing you. Your written offer explains exactly how this works.</p></details>
+      <details><summary>How do I know a job is real?</summary><p>Every listing has an approved labor certification. You can search it yourself on the Department of Labor's public SeasonalJobs.dol.gov site.</p></details>
+      <details><summary>How long are contracts?</summary><p>Seasonal contracts usually run from 3 to 10 months, depending on the employer's certified need.</p></details>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container elig">
+      <div>
+        <h2>Get in touch</h2>
+        <p>Have a question about a role or the process? Send us a message and our team will reply by email.</p>
+        <p class="muted">Official resources: <a href="https://seasonaljobs.dol.gov" target="_blank" rel="noopener">SeasonalJobs.dol.gov</a> · <a href="https://travel.state.gov" target="_blank" rel="noopener">travel.state.gov</a></p>
+      </div>
+      <form id="contact-form" class="card form">
+        <label>Name<input name="name" required /></label>
+        <label>Email<input name="email" type="email" required /></label>
+        <label>Message<textarea name="message" rows="4" required></textarea></label>
+        <button class="btn" type="submit">Send message</button>
+        <p id="contact-status" class="muted"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Workaway International</strong><p>Ethical, transparent international work placement.</p></div>
+      <p>© <span id="year"></span> Workaway International. We never charge workers recruitment fees.</p>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
