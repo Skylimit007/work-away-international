@@ -21,11 +21,26 @@ app.get("/api/jobs", (req, res) => {
   res.json(category && category !== "All" ? jobs.filter((j) => j.category === category) : jobs);
 });
 
-app.post("/api/contact", (req, res) => {
-  const { name, email, message } = req.body || {};
-  if (!name || !email || !message) return res.status(400).json({ ok: false, error: "Please fill in all fields." });
-  console.log(`[contact] message received from ${name}`);
-  res.json({ ok: true });
+const FORMSUBMIT_EMAIL = process.env.FORMSUBMIT_EMAIL || "roynyarega@gmail.com";
+const SITE_URL = process.env.SITE_URL || "https://workawayinternational.com";
+
+// Forwards form submissions to FormSubmit server-side so they work from any host (incl. localhost).
+app.post("/api/submit", async (req, res) => {
+  const fields = req.body || {};
+  if (!fields._subject) return res.status(400).json({ success: false, message: "Missing subject." });
+  try {
+    const r = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json", Referer: SITE_URL + "/", Origin: SITE_URL },
+      body: JSON.stringify(fields)
+    });
+    const data = await r.json().catch(() => ({ success: "false", message: "Invalid response from FormSubmit." }));
+    console.log(`[submit] ${fields._subject}: success=${data.success} ${data.success === "true" ? "" : data.message || ""}`);
+    res.status(String(data.success) === "true" ? 200 : 502).json(data);
+  } catch (err) {
+    console.error("[submit] error", err.message);
+    res.status(502).json({ success: false, message: "Could not reach FormSubmit." });
+  }
 });
 
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));

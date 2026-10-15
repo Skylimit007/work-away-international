@@ -1,7 +1,7 @@
-const FORMSUBMIT_URL = "https://formsubmit.co/ajax/roynyarega@gmail.com";
+const SUBMIT_URL = "/api/submit"; // server forwards to FormSubmit
 
 async function sendToFormSubmit(subject, fields) {
-  const res = await fetch(FORMSUBMIT_URL, {
+  const res = await fetch(SUBMIT_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({ _subject: subject, _template: "table", _captcha: "false", ...fields })
@@ -76,7 +76,9 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     status.style.color = "#1f7a3f";
     form.reset();
   } catch (err) {
-    status.textContent = "Sorry, your message could not be sent. Please try again shortly.";
+    status.textContent = /activ/i.test(err.message)
+      ? "Our contact form is being activated. Please try again soon."
+      : "Sorry, your message could not be sent. Please try again shortly.";
     status.style.color = "var(--accent)";
   } finally {
     btn.disabled = false;
