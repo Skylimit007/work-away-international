@@ -1,3 +1,16 @@
+const FORMSUBMIT_URL = "https://formsubmit.co/ajax/roynyarega@gmail.com";
+
+async function sendToFormSubmit(subject, fields) {
+  const res = await fetch(FORMSUBMIT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ _subject: subject, _template: "table", _captcha: "false", ...fields })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || String(data.success) !== "true") throw new Error(data.message || "Submission failed");
+  return data;
+}
+
 const categories = ["All", "Agriculture", "Hospitality", "Food Service", "Landscaping"];
 const filtersEl = document.getElementById("filters");
 const listEl = document.getElementById("job-list");
@@ -37,16 +50,38 @@ document.getElementById("elig-form").addEventListener("submit", (e) => {
   else if (d.country === "Not sure") { msg = "Please confirm your country on the official eligible-countries list published by the U.S. government, then contact us."; cls = "warn"; }
   else { msg = "You look like a good fit to get started. Browse our open roles and send us a message about the one that interests you."; cls = "ok"; }
   box.className = `card result ${cls}`;
-  box.innerHTML = `<h3>Your result</h3><p>${msg}</p>`;
+  box.innerHTML = `<h3>Your result</h3><p>${msg}</p><p class="muted" id="elig-status">Saving your answers…</p>`;
+  const btn = e.target.querySelector("button");
+  btn.disabled = true;
+  sendToFormSubmit("New eligibility check - Workaway International", {
+    "18 or older": d.age, "Valid passport": d.passport, "Eligible country": d.country, Result: msg
+  })
+    .then(() => (document.getElementById("elig-status").textContent = "Your answers have been sent to our team."))
+    .catch(() => (document.getElementById("elig-status").textContent = "We couldn't send your answers, but your result above is still valid."))
+    .finally(() => (btn.disabled = false));
 });
 
 document.getElementById("contact-form").addEventListener("submit", async (e) => {
   e.preventDefault();
+  const form = e.target;
   const status = document.getElementById("contact-status");
-  const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(e.target))) });
-  const data = await res.json();
-  status.textContent = data.ok ? "Thanks! Our team will reply by email." : data.error;
-  if (data.ok) e.target.reset();
+  const btn = form.querySelector("button");
+  const d = Object.fromEntries(new FormData(form));
+  btn.disabled = true;
+  btn.textContent = "Sending…";
+  status.textContent = "";
+  try {
+    await sendToFormSubmit("New contact message - Workaway International", { Name: d.name, email: d.email, Message: d.message, _replyto: d.email });
+    status.textContent = "Thanks! Your message has been sent. Our team will reply by email.";
+    status.style.color = "#1f7a3f";
+    form.reset();
+  } catch (err) {
+    status.textContent = "Sorry, your message could not be sent. Please try again shortly.";
+    status.style.color = "var(--accent)";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Send message";
+  }
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
