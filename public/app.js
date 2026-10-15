@@ -2,7 +2,8 @@
 "use strict";
 
 // Your existing server-side endpoint forwards requests to FormSubmit.
-const SUBMIT_URL = "/api/submit";
+const SUBMIT_URL =
+  "https://formsubmit.co/ajax/roynyarega@gmail.com";
 
 async function sendToFormSubmit(subject, fields) {
   let res;
