@@ -1,4 +1,4 @@
 node_modules/
 .env
-*.png
+/*.png
 .playwright-mcp/
