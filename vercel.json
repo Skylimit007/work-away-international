@@ -1,0 +1,5 @@
+{
+  "outputDirectory": "public",
+  "buildCommand": "",
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+}

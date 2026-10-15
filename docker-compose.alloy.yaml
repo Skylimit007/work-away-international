@@ -7,6 +7,5 @@ services:
       - .:/workspace
     environment:
       PORT: 3000
-      SITE_URL: ${SITE_URL:-https://workawayinternational.com}
       IS_ALLOY: ${IS_ALLOY:-false}
     command: bash -lc "npm install && npm run dev"
