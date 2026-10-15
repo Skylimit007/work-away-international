@@ -64,3 +64,8 @@ summary { font-weight: 600; cursor: pointer; }
 
 .btn-accent { background: var(--accent); } .btn-accent:hover { background: var(--accent-dark); }
 .footer { border-top: 4px solid var(--accent); }
+.countries { background: var(--primary); color: #fff; padding: 20px 0; }
+.countries-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.countries-title { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 13px; color: #fff; }
+.country-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 12px; flex-wrap: wrap; }
+.country-list li { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); padding: 6px 14px; border-radius: 999px; font-weight: 600; font-size: 15px; display: flex; gap: 8px; align-items: center; }
